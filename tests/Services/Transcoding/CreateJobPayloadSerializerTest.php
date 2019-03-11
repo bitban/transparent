@@ -23,7 +23,7 @@ class CreateJobPayloadSerializerTest extends TestCase
             "ftp://usuario:password@domain.tld/ruta/al/directorio/",
             "s3://usuario:password@bucketDeS3/ruta/al/directorio/"
         ];
-        $email = "hector@bitban.com";
+        $email = "info@bitban.com";
         $callbackUrl = "http://domain.tld/callback";
         $notifications = [
             new CreateJobEmailNotificationPayload($email),
@@ -80,7 +80,7 @@ class CreateJobPayloadSerializerTest extends TestCase
             "ftp://usuario:password@domain.tld/ruta/al/directorio/",
             "s3://usuario:password@bucketDeS3/ruta/al/directorio/"
         ];
-        $email = "hector@bitban.com";
+        $email = "info@bitban.com";
         $callbackUrl = "http://domain.tld/callback";
         $notifications = [
             new CreateJobEmailNotificationPayload($email),

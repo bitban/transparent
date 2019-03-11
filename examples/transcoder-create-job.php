@@ -19,7 +19,7 @@ try {
         "s3://usuario:password@bucketDeS3/ruta/al/directorio/"
     ];
     $notifications = [
-        new CreateJobEmailNotificationPayload("hector@bitban.com"),
+        new CreateJobEmailNotificationPayload("info@bitban.com"),
         new CreateJobCallbackNotificationPayload("http://domain.tld/callback")
     ];
     $qualities = [
