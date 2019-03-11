@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright 2019 Bitban Technologies, S.L.
+ * Todos los derechos reservados.
+ */
+
+namespace Bitban\Transparent\Services\Transcoder;
+
+use Bitban\Transparent\Config\Company;
+use Bitban\Transparent\Exceptions\TransparentException;
+use Bitban\Transparent\Responses\Transcoder\JobBasicResponse;
+use Bitban\Transparent\Services\HttpClient;
+use JMS\Serializer\Serializer;
+
+class GetJobsService
+{
+    /** @var HttpClient */
+    private $httpClient;
+
+    /** @var Company */
+    private $company;
+
+    /** @var Serializer */
+    private $serializer;
+
+    public function __construct(HttpClient $httpClient, Company $company, Serializer $serializer)
+    {
+        $this->httpClient = $httpClient;
+        $this->company = $company;
+        $this->serializer = $serializer;
+    }
+
+    private function getUrl(?int $limit): string
+    {
+        $companyId = $this->company->getCompanyId();
+        $url = "https://api.transparentcdn.com/v1/media/{$companyId}/transcode/";
+
+        if (!is_null($limit)) {
+            $url .= "?limit=$limit";
+        }
+        return $url;
+    }
+
+    /**
+     * @param int|null $limit
+     * @return JobBasicResponse[]
+     * @throws TransparentException
+     */
+    public function getJobs(?int $limit): array
+    {
+        $url = $this->getUrl($limit);
+        $json = $this->httpClient->get($url);
+
+        return $this->serializer->deserialize($json, "array<" . JobBasicResponse::class . ">", "json");
+    }
+}

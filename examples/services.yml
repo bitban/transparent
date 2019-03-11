@@ -1,0 +1,26 @@
+---
+
+parameters:
+
+  transparent.company_id: '%env(TRANSPARENT_COMPANY_ID)%'
+  transparent.credentials.client_id: '%env(TRANSPARENT_CREDENTIALS_CLIENT_ID)%'
+  transparent.credentials.client_secret: '%env(TRANSPARENT_CREDENTIALS_CLIENT_SECRET)%'
+
+services:
+
+  _defaults:
+     autowire: true
+     public: false
+
+
+  Bitban\Transparent\Config\Company:
+    arguments:
+      $companyId: '%transparent.company_id%'
+
+  Bitban\Transparent\Config\Credentials:
+    arguments:
+      $clientId: '%transparent.credentials.client_id%'
+      $clientSecret: '%transparent.credentials.client_secret%'
+
+  Bitban\Transparent\Services\:
+    resource: '../src/Services/*'

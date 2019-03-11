@@ -1,0 +1,59 @@
+{
+    "name": "bitban/transparent",
+    "description": "Integración con Transparent CDN",
+    "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Bitban Technologies",
+            "email": "info@bitban.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bitban\\Transparent\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bitban\\Transparent\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1.3",
+        "ext-json": "*",
+        "league/oauth2-client": "^2.4",
+        "guzzlehttp/guzzle": "^6.3",
+        "jms/serializer": "^1.13"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0",
+        "bitban/php-code-quality-tools": "dev-master"
+    },
+    "suggest": {
+        "symfony/dependency-injection": "Allows a simpler configuration"
+    },
+    "config": {
+        "bin-dir": "bin/",
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Bitban\\PhpCodeQualityTools\\Composer\\ScriptHandler::checkHooks"
+        ],
+        "post-update-cmd": [
+            "Bitban\\PhpCodeQualityTools\\Composer\\ScriptHandler::checkHooks"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.bitban.int"
+        }
+    ]
+}
