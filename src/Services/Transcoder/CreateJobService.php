@@ -11,6 +11,7 @@ use Bitban\Transparent\Exceptions\TransparentException;
 use Bitban\Transparent\Payloads\Transcoder\CreateJobPayload;
 use Bitban\Transparent\Services\HttpClient;
 use JMS\Serializer\Serializer;
+use Psr\Log\LoggerInterface;
 
 class CreateJobService
 {
@@ -26,16 +27,21 @@ class CreateJobService
     /** @var CreateJobPayloadSerializer */
     private $createJobPayloadSerializer;
 
+    /** @var LoggerInterface */
+    private $logger;
+
     public function __construct(
         HttpClient $httpClient,
         Company $company,
         Serializer $serializer,
-        CreateJobPayloadSerializer $createJobPayloadSerializer
+        CreateJobPayloadSerializer $createJobPayloadSerializer,
+        LoggerInterface $logger
     ) {
         $this->httpClient = $httpClient;
         $this->company = $company;
         $this->serializer = $serializer;
         $this->createJobPayloadSerializer = $createJobPayloadSerializer;
+        $this->logger = $logger;
     }
 
     private function getUrl(): string
@@ -60,6 +66,8 @@ class CreateJobService
         if (!preg_match("/#([^\s]+)/", $response, $matches)) {
             throw new TransparentException("Unexpected createJob response '$response'");
         }
+
+        $this->logger->info("Created transcoding job calling to url $url. Job payload " . json_encode($postData). " Transparent response " . $response);
 
         return $matches[1];
     }
