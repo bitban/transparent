@@ -13,7 +13,7 @@ class JobBasicResponse
     /**
      * @var \DateTime
      *
-     * @Type("DateTime<'Y-m-d H:i:sO'>")
+     * @Type("DateTime<'Y-m-d H:i:s'>")
      */
     private $created_on;
 
