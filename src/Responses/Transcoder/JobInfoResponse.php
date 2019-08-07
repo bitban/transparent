@@ -68,7 +68,7 @@ class JobInfoResponse
     /**
      * @var \DateTime
      *
-     * @Type("DateTime<'Y-m-d H:i:sO'>")
+     * @Type("DateTime<'Y-m-d H:i:s'>")
      */
     private $timestamp;
 
