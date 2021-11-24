@@ -9,3 +9,6 @@ La librería puede usarse directamente instanciando manualmente las clases de co
 * https://soporte.transparentcdn.com/projects/incidencias/wiki
 * https://soporte.transparentcdn.com/projects/incidencias/wiki/Transcoding
 * https://soporte.transparentcdn.com/projects/incidencias/wiki/Invalidaci%C3%B3n
+* https://docs.transparentedge.eu/
+* https://docs.transparentedge.eu/getting-started/dashboard/invalidando-contenido
+* https://api.transparentcdn.com/docs (Es necesario hacer login para ver todos los endpoints)
