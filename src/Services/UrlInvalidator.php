@@ -32,18 +32,26 @@ class UrlInvalidator
     private function getUrl(): string
     {
         $companyId = $this->company->getCompanyId();
-        return "https://api.transparentcdn.com/v1/companies/{$companyId}/invalidate/";
+        return "https://api.transparentcdn.com/v1/companies/$companyId/invalidate/";
     }
 
     /**
      * @param array $urls
+     * @param bool $soft @see https://docs.transparentedge.eu/getting-started/dashboard/invalidando-contenido#invalidaciones-suaves-softpurges
      * @return UrlsInvalidationResponse
      * @throws TransparentException
      */
-    public function invalidateUrls(array $urls): UrlsInvalidationResponse
+    public function invalidateUrls(array $urls, bool $soft = false): UrlsInvalidationResponse
     {
         $url = $this->getUrl();
-        $jsonPayload = ["urls" => $urls];
+        $jsonPayload = [
+            "urls" => $urls,
+        ];
+
+        if ($soft) {
+            $jsonPayload["soft"] = true;
+        }
+
         $json = $this->httpClient->postJson($url, $jsonPayload);
 
         return $this->serializer->deserialize($json, UrlsInvalidationResponse::class, "json");
