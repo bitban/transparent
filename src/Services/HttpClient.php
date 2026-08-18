@@ -60,6 +60,25 @@ class HttpClient
 
     /**
      * @param string $url
+     * @return string
+     * @throws TransparentException
+     */
+    public function delete(string $url): string
+    {
+        try {
+            $options = [
+                RequestOptions::HEADERS => $this->getHeaders(),
+            ];
+            $response = $this->guzzleClient->delete($url, $options);
+
+            return $response->getBody();
+        } /** @noinspection PhpRedundantCatchClauseInspection */ catch (GuzzleException $e) {
+            throw TransparentException::buildWithException($e);
+        }
+    }
+
+    /**
+     * @param string $url
      * @param array $jsonPayload
      * @return string
      * @throws TransparentException
